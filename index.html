@@ -1,106 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mangalore Rentals</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mangalore Rentals</title>
 
-    header {
-      background: #2b7cff;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f9;
+}
 
-    .container {
-      padding: 15px;
-    }
+header {
+  background: linear-gradient(90deg, #2b7cff, #00c6ff);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    .card {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+.container {
+  padding: 15px;
+}
 
-    .price {
-      color: green;
-      font-weight: bold;
-      font-size: 18px;
-    }
+/* Search */
+.search-box {
+  margin-bottom: 15px;
+}
 
-    .btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: #2b7cff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
-    .post-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ff5722;
-      color: white;
-      padding: 12px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+/* Cards */
+.card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.price {
+  color: green;
+  font-weight: bold;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #2b7cff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* Floating button */
+.post-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff5722;
+  color: white;
+  padding: 14px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Form popup */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+}
+
+.form-popup input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-popup button {
+  width: 100%;
+  padding: 10px;
+  background: #2b7cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  🏠 Mangalore Rentals
-</header>
+<header>🏠 Mangalore Rentals</header>
 
 <div class="container">
 
-  <!-- Listing 1 -->
-  <div class="card">
-    <p><b>📍 Bejai</b></p>
-    <p class="price">₹8000 / month</p>
-    <p>1BHK available, semi furnished</p>
-    <a href="tel:9876543210" class="btn">📞 Call</a>
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search location..." onkeyup="searchListing()">
   </div>
 
-  <!-- Listing 2 -->
-  <div class="card">
-    <p><b>📍 Kankanady</b></p>
-    <p class="price">₹12000 / month</p>
-    <p>2BHK, family preferred</p>
-    <a href="tel:9876543211" class="btn">📞 Call</a>
-  </div>
+  <!-- Listings -->
+  <div id="listings">
 
-  <!-- Listing 3 -->
-  <div class="card">
-    <p><b>📍 Surathkal</b></p>
-    <p class="price">₹5000 / month</p>
-    <p>Single room for students</p>
-    <a href="tel:9876543212" class="btn">📞 Call</a>
+    <div class="card">
+      <p><b>📍 Bejai</b></p>
+      <p class="price">₹8000</p>
+      <p>1BHK available</p>
+      <a href="tel:9876543210" class="btn">Call</a>
+    </div>
+
+    <div class="card">
+      <p><b>📍 Kankanady</b></p>
+      <p class="price">₹12000</p>
+      <p>2BHK</p>
+      <a href="tel:9876543211" class="btn">Call</a>
+    </div>
+
   </div>
 
 </div>
 
-<!-- Post Listing Button -->
-<a href="https://wa.me/919876543210" class="post-btn">
-  + Post Listing
-</a>
+<!-- Floating Button -->
+<div class="post-btn" onclick="openForm()">+</div>
+
+<!-- Form -->
+<div class="form-popup" id="form">
+  <input type="text" id="location" placeholder="Location">
+  <input type="text" id="price" placeholder="Price">
+  <input type="text" id="desc" placeholder="Description">
+  <input type="text" id="phone" placeholder="Phone number">
+  <button onclick="addListing()">Post Listing</button>
+</div>
+
+<script>
+
+// Search
+function searchListing() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.getElementsByClassName("card");
+
+  for (let i = 0; i < cards.length; i++) {
+    let text = cards[i].innerText.toLowerCase();
+    cards[i].style.display = text.includes(input) ? "" : "none";
+  }
+}
+
+// Open form
+function openForm() {
+  document.getElementById("form").style.display = "block";
+}
+
+// Add listing
+function addListing() {
+  let location = document.getElementById("location").value;
+  let price = document.getElementById("price").value;
+  let desc = document.getElementById("desc").value;
+  let phone = document.getElementById("phone").value;
+
+  let card = `
+    <div class="card">
+      <p><b>📍 ${location}</b></p>
+      <p class="price">₹${price}</p>
+      <p>${desc}</p>
+      <a href="tel:${phone}" class="btn">Call</a>
+    </div>
+  `;
+
+  document.getElementById("listings").innerHTML += card;
+
+  document.getElementById("form").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
